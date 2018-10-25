@@ -34,14 +34,14 @@ class ytt():
         audiofile = sr.AudioFile(vid + '.flac')
         with audiofile as source:
             audio = r.record(source)
-        with open('txt/{}.txt'.format(vid), 'w') as txtfile:
+        with open('txts/{}.txt'.format(vid), 'w') as txtfile:
             txtfile.write(r.recognize_sphinx(audio)) #recognize_google
             
     def start(self):
         i = 0
         for id in self.ids:
             i += 1
-            if os.path.exists('txt/{}.txt'.format(id)):
+            if os.path.exists('txts/{}.txt'.format(id)):
                 continue
             try:
                 print('{}) {}\nDownloading Audio ...'.format(str(i), str(id)))
