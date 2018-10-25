@@ -3,11 +3,15 @@ import youtube_dl
 import speech_recognition as sr
 import csv
 import os
+from datetime import datetime
+
 
 class ytt():
     def __init__(self):
         self.ids = []
         self.read_csv('news_politics.csv')
+        if not os.path.exists('txts'):
+            os.makedirs('txts')
         
     def read_csv(self, csvpath):
         with open(csvpath, 'r', newline='') as csvfile:
@@ -44,11 +48,11 @@ class ytt():
             if os.path.exists('txts/{}.txt'.format(id)):
                 continue
             try:
-                print('{}) {}\nDownloading Audio ...'.format(str(i), str(id)))
+                print('{}) {}\n{} - Downloading Audio ...'.format(str(i), str(id), datetime.now().strftime('%H:%M:%S')))
                 self.get_audio(id)
-                print('Download Completed.\nProcessing Audio File ...')
+                print('{} - Download Completed.\n{} - Processing Audio File ...'.format(datetime.now().strftime('%H:%M:%S'), datetime.now().strftime('%H:%M:%S')))
                 self.get_text(id)
-                print('Processing Completed')
+                print('{} - Processing Completed'.format(datetime.now().strftime('%H:%M:%S')))
                 if os.path.exists('{}.flac'.format(id)):
                     os.remove('{}.flac'.format(id))
             except:
