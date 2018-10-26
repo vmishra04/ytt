@@ -4,8 +4,11 @@ import speech_recognition as sr
 import csv
 import os
 from datetime import datetime
-
-
+"""
+@Title: Youtube to Text.
+@Author: devazm.
+@Date: 10/25/2018.
+"""
 class ytt():
     def __init__(self):
         self.ids = []
@@ -45,7 +48,7 @@ class ytt():
         i = 0
         for id in self.ids:
             i += 1
-            if os.path.exists('txts/{}.txt'.format(id)):
+            if os.path.exists('txts/{}.txt'.format(id)) or os.path.exists('{}.NA'.format(id)):
                 continue
             try:
                 print('{}) {}\n{} - Downloading Audio ...'.format(str(i), str(id), datetime.now().strftime('%H:%M:%S')))
